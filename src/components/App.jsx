@@ -37,7 +37,7 @@ const App = () => {
       const updatedContacts = [...state.contacts, newContact];
       setState({
         ...state,
-        contacts: [...state.contacts, newContact],
+        contacts: updatedContacts,
         name: '',
         number: '',
       });
@@ -58,10 +58,15 @@ const App = () => {
   };
 
   const deleteContact = contactId => {
+    const updatedContacts = state.contacts.filter(
+      contact => contact.id !== contactId
+    );
     setState(prevState => ({
       ...prevState,
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+      contacts: updatedContacts,
     }));
+
+    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
   const handleContactSearch = () => {
@@ -76,7 +81,9 @@ const App = () => {
 
   useEffect(() => {
     const storedContacts = JSON.parse(localStorage.getItem('contacts'));
-    setState({ ...state, contacts: storedContacts || [] });
+    if (storedContacts) {
+      setState(prevState => ({ ...prevState, contacts: storedContacts }));
+    }
   }, []);
 
   return (
