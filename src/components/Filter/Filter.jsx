@@ -1,6 +1,6 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
-const Filter = ({ handleFilterChange }) => {
+function Filter({ handleFilterChange }) {
   return (
     <input
       id="search"
@@ -8,6 +8,10 @@ const Filter = ({ handleFilterChange }) => {
       onChange={e => handleFilterChange(e.target.value)}
     />
   );
+}
+
+Filter.propTypes = {
+  handleFilterChange: PropTypes.func.isRequired,
 };
 
 export default Filter;

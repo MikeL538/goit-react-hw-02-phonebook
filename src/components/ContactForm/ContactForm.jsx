@@ -1,7 +1,7 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import css from './contactForm.module.css';
 
-const ContactForm = ({ name, number, handleInputChange, handleAddContact }) => {
+function ContactForm({ name, number, handleInputChange, handleAddContact }) {
   return (
     <form className={css.form} onSubmit={handleAddContact}>
       <p>Name</p>
@@ -31,6 +31,13 @@ const ContactForm = ({ name, number, handleInputChange, handleAddContact }) => {
       </button>
     </form>
   );
+}
+
+ContactForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleAddContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
